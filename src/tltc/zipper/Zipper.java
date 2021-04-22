@@ -1,4 +1,4 @@
-package tltc.zip;
+package tltc.zipper;
 
 import java.io.File;
 import java.util.Objects;
@@ -13,17 +13,14 @@ import org.apache.commons.cli.ParseException;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.ZipParameters;
-import net.lingala.zip4j.model.enums.AesKeyStrength;
 import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 public class Zipper {
-	public Zipper() {
-	}
 	public static void main(String[] args) {
 		new Zipper().cli(args);
 	}
 
-	private void cli(String[] args) {
+	public void cli(String[] args) {
 //      Arrays.stream(args).forEach(System.out::println);
 		String password = null;
 		String zipFileName = null;
@@ -64,7 +61,7 @@ public class Zipper {
 
     }
 
-	private void doZip(String zipFileName, String password, String[] filesToZip) {
+	public void doZip(String zipFileName, String password, String[] filesToZip) {
 		ZipFile zipFile = null;
 		ZipParameters zipParameters = new ZipParameters();
 		if (password != null) {
