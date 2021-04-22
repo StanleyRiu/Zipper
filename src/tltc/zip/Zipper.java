@@ -1,4 +1,4 @@
-package tltc.zipper;
+package tltc.zip;
 
 import java.io.File;
 import java.util.Objects;
