@@ -20,7 +20,7 @@ public class Zipper {
 		new Zipper().cli(args);
 	}
 
-	public void cli(String[] args) {
+	private void cli(String[] args) {
 //      Arrays.stream(args).forEach(System.out::println);
 		String password = null;
 		String zipFileName = null;
@@ -58,10 +58,9 @@ public class Zipper {
 			zipFileName = cmd.getOptionValue("f"); 
 		}
 		this.doZip(zipFileName, password, cmd.getArgs());
-
     }
 
-	public void doZip(String zipFileName, String password, String[] filesToZip) {
+	private void doZip(String zipFileName, String password, String[] filesToZip) {
 		ZipFile zipFile = null;
 		ZipParameters zipParameters = new ZipParameters();
 		if (password != null) {
@@ -85,6 +84,5 @@ public class Zipper {
 			e.printStackTrace();
 		}
 	}
-
     
 }
