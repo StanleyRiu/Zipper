@@ -1,6 +1,7 @@
 package tltc.zip;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import org.apache.commons.cli.CommandLine;
@@ -17,10 +18,11 @@ import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 public class Zipper {
 	public static void main(String[] args) {
-		new Zipper().cli(args);
+		Zipper zipper = new Zipper();
+		zipper.cli(args);
 	}
 
-	private void cli(String[] args) {
+	public String cli(String[] args) {
 //      Arrays.stream(args).forEach(System.out::println);
 		String password = null;
 		String zipFileName = null;
@@ -49,18 +51,26 @@ public class Zipper {
 		if (Objects.requireNonNull(cmd).hasOption("h")) {
 			// automatically generate the help statement
 			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp("CLI", options);
+			formatter.printHelp(this.getClass().getSimpleName(), options);
 		} 
 		if (cmd.hasOption("p")) {
 			password = cmd.getOptionValue("p");
 		} 
 		if (cmd.hasOption("f")) {
 			zipFileName = cmd.getOptionValue("f"); 
+		} else {
+			zipFileName = Paths.get("").toAbsolutePath().normalize().getFileName().toString()+".zip";
+		}
+		if (cmd.getArgs().length == 0) {
+			System.err.println("requires files/folders to zip");
+			new HelpFormatter().printHelp(this.getClass().getSimpleName(), options);
+			System.exit(0);
 		}
 		this.doZip(zipFileName, password, cmd.getArgs());
+		return zipFileName;
     }
 
-	private void doZip(String zipFileName, String password, String[] filesToZip) {
+	public void doZip(String zipFileName, String password, String[] filesToZip) {
 		ZipFile zipFile = null;
 		ZipParameters zipParameters = new ZipParameters();
 		if (password != null) {
