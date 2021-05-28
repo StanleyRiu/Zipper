@@ -24,8 +24,10 @@ public class Configer extends Properties {
 
 	void loadProperties() {
 		try {
+			InputStream pis = this.getClass().getClassLoader().getResourceAsStream(propertiesFile);
 			//pre-process properties file to escape backslash so user can just use \ as path separator
-			Scanner scanner = new Scanner(new File(propertiesFile), "UTF-8");
+			Scanner scanner = new Scanner(pis, "UTF-8");
+//			Scanner scanner = new Scanner(new File(propertiesFile), "UTF-8");
 //			scanner.forEachRemaining(System.out::println);
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			while (scanner.hasNext()) {
