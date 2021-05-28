@@ -1,20 +1,7 @@
-package tltc.cx;
+package tltc.zip;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -24,7 +11,7 @@ public class Configer extends Properties {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	String propertiesFile = "cxconfig.properties";
+	String propertiesFile = "zipconfig.properties";
 
 	public Configer() {
 		loadProperties();

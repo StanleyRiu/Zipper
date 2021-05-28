@@ -2,6 +2,7 @@ package tltc.zip;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Objects;
 
 import org.apache.commons.cli.CommandLine;
@@ -17,15 +18,17 @@ import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 public class Zipper {
+	String password = null;
+	String zipFileName = null;
+	Configer conf = new Configer();
+
 	public static void main(String[] args) {
 		Zipper zipper = new Zipper();
 		zipper.cli(args);
 	}
 
 	public String cli(String[] args) {
-//      Arrays.stream(args).forEach(System.out::println);
-		String password = null;
-		String zipFileName = null;
+//		Arrays.stream(args).forEach(System.out::println);
 
 		// ***Definition Stage***
 		// create Options object
@@ -55,7 +58,7 @@ public class Zipper {
 		} 
 		if (cmd.hasOption("p")) {
 			password = cmd.getOptionValue("p");
-		} 
+		}
 		if (cmd.hasOption("f")) {
 			zipFileName = cmd.getOptionValue("f"); 
 		} else {
@@ -66,6 +69,16 @@ public class Zipper {
 			new HelpFormatter().printHelp(this.getClass().getSimpleName(), options);
 			System.exit(0);
 		}
+		if (cmd.getOptions().length == 0 && cmd.getArgs().length != 0) {
+			password = conf.getProperty("EncryptPassword");
+			File f = new File(cmd.getArgs()[0]);
+			if (f.isDirectory()) {
+				zipFileName = f.getParent()+File.separator+f.getName()+".zip";
+			} else {
+				zipFileName = f.getParent()+File.separator+f.getParentFile().getName() + ".zip";
+			}
+		}
+
 		this.doZip(zipFileName, password, cmd.getArgs());
 		return zipFileName;
     }
@@ -73,7 +86,7 @@ public class Zipper {
 	public void doZip(String zipFileName, String password, String[] filesToZip) {
 		ZipFile zipFile = null;
 		ZipParameters zipParameters = new ZipParameters();
-		if (password != null) {
+		if (password != null && !password.equals("")) {
 			zipParameters.setEncryptFiles(true);
 			zipParameters.setEncryptionMethod(EncryptionMethod.ZIP_STANDARD);
 //			zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
