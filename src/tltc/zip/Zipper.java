@@ -20,7 +20,7 @@ import net.lingala.zip4j.model.enums.EncryptionMethod;
 public class Zipper {
 	String password = null;
 	String zipFileName = null;
-	Configer conf = new Configer();
+	Configer conf = null;
 
 	public static void main(String[] args) {
 		Zipper zipper = new Zipper();
@@ -70,6 +70,7 @@ public class Zipper {
 			System.exit(0);
 		}
 		if (cmd.getOptions().length == 0 && cmd.getArgs().length != 0) {
+			conf = new Configer();
 			password = conf.getProperty("EncryptPassword");
 			File f = new File(cmd.getArgs()[0]);
 			if (f.isDirectory()) {

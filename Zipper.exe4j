@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="7.0" transformSequenceNumber="3">
+  <directoryPresets config="D:/PortableSoftware/exe4j/icon" />
+  <application name="Zipper" distributionSourceDir="D:/Develop/eclipse-workspace/Zipper" />
+  <executable name="Zipper" iconSet="true" iconFile="D:/PortableSoftware/exe4j/icon/Zerode-Plump-Folder-Archive-zip.ico" executableDir="." executableMode="console" />
+  <java mainClass="tltc.zip.Zipper" minVersion="1.8">
+    <searchSequence>
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+      <directory location="../../../WorkBench/jdk-11.0.6" />
+    </searchSequence>
+    <classPath>
+      <archive location="D:/Develop/eclipse-workspace/Zipper/Zipper.jar" failOnError="false" />
+      <archive location="D:/Develop/jar/zip4j-2.7.0.jar" failOnError="false" />
+      <archive location="D:/Develop/jar/commons-cli-1.4.jar" failOnError="false" />
+    </classPath>
+  </java>
+</exe4j>
