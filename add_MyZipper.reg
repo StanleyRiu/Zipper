@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\*\shell\MyZipper]
+"MUIVerb"="MyZipper"
+"Icon"="D:\\Develop\\eclipse-workspace\\Zipper\\Zipper.exe"
+
+[HKEY_CLASSES_ROOT\*\shell\MyZipper\command]
+@="D:\\Develop\\eclipse-workspace\\Zipper\\Zipper.exe '%1'"
